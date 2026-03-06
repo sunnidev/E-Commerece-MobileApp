@@ -16,9 +16,8 @@ export function WishListProvider({ children }: { children: ReactNode }) {
     }
 
     const toggleWishlist = (product: Product) => {
-        const exists = wishlist.find(item => item._id === product._id)
-
         setWishlist((prev) => {
+            const exists = prev.some(item => item._id === product._id)
             if (exists) {
                 return prev.filter(item => item._id !== product._id)
             }
@@ -35,7 +34,7 @@ export function WishListProvider({ children }: { children: ReactNode }) {
     }, [])
 
     return (
-        <WishListContext.Provider value={{ wishlist, loading , toggleWishlist , isInWishList}}>
+        <WishListContext.Provider value={{ wishlist, loading, toggleWishlist, isInWishList }}>
             {children}
         </WishListContext.Provider>
     )
