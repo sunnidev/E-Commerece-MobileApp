@@ -22,17 +22,18 @@ const ProductDetails = () => {
     const [selectedSize, setSelectedSize] = useState<string | null>(null)
     const [activeImageIndex, setActiveImageIndex] = useState(0)
 
-    const { addToCart, cartItems,itemCount } = useCart()
+    const { addToCart, cartItems, itemCount } = useCart()
     const { toggleWishlist, isInWishList } = useWishList()
 
     const fetchProductDetails = async () => {
-        setProduct(dummyProducts.find(p => p._id === id) as any)
+        const foundProduct: any = dummyProducts.find(p => p._id === id)
+        setProduct(foundProduct || null)
         setLoading(false)
     }
 
     useEffect(() => {
         fetchProductDetails()
-    }, [])
+    }, [id])
 
     if (loading) {
         return (
